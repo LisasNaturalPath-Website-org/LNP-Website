@@ -196,7 +196,6 @@ const BookingForm: React.FC<BookingFormProps> = ({ service, onClose, onSuccess }
 
 export function ServiceDetail() {
   const { slug } = useParams<{ slug: string }>();
-  const navigate = useNavigate();
   const service = slug ? getServiceBySlug(slug) : undefined;
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);

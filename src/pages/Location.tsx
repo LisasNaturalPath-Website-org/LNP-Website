@@ -1,4 +1,3 @@
-import React from 'react';
 import { Clock, Phone, Mail, MapPin } from 'lucide-react';
 import { GoogleMap } from '../components/GoogleMap';
 
