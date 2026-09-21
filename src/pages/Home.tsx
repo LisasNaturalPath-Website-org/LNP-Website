@@ -1,22 +1,15 @@
 import React, { useState } from 'react';
 import { 
-  Leaf, 
   MapPin, 
   Calendar, 
   ShoppingBag, 
   Star, 
-  Clock, 
   Mail,
-  Facebook,
-  Instagram,
-  Youtube,
   ChevronRight
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 import lavenderHeroBg from '../../assets/lavender_hero_bg.png';
-import backgroundLavenderHeader from '../../assets/background-Lavender-header.png';
-import backgroundLavenderFaded from '../../assets/background-Lavender_faded-center.png';
 import lisaAtDesk from '../../assets/Lisa_at-desk.jpg';
 import probioticEleven from '../../assets/supplements/NaturesSunshine_ProbioticEleven.png';
 import chlorophyllPacks from '../../assets/supplements/NaturesSunshine_Chlorophyll-detox-stick-pack.png';

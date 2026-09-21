@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { Calendar, ChevronRight, CheckCircle2, ArrowLeft, Clock, ShieldCheck, X } from 'lucide-react';
 import { getServiceBySlug, servicesData, ServiceItem } from '../data/servicesData';
 import { supabase } from '../lib/supabase';
@@ -196,7 +196,6 @@ const BookingForm: React.FC<BookingFormProps> = ({ service, onClose, onSuccess }
 
 export function ServiceDetail() {
   const { slug } = useParams<{ slug: string }>();
-  const navigate = useNavigate();
   const service = slug ? getServiceBySlug(slug) : undefined;
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);

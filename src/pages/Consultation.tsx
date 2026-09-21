@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Calendar, Clock, User, Mail, Phone, MessageSquare, AlertCircle, ChevronRight, X } from 'lucide-react';
+import { Clock, User, Mail, Phone, MessageSquare, AlertCircle, ChevronRight, X } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 
 type ConsultationType = 'initial' | 'followup' | 'focused';
@@ -313,7 +313,7 @@ export function Consultation() {
               {!consultation.followUp && (
                 <button
                   onClick={() => {
-                    setSelectedType(consultation.type);
+                    setSelectedType(consultation.type as ConsultationType);
                     setShowBookingForm(true);
                   }}
                   className="w-full py-2 px-4 bg-brand-purple text-white rounded-full hover:bg-brand-purple/90 transition-colors"
@@ -326,7 +326,7 @@ export function Consultation() {
                 <div>
                   <button
                     onClick={() => {
-                      setSelectedType(consultation.type);
+                      setSelectedType(consultation.type as ConsultationType);
                       setShowBookingForm(true);
                     }}
                     className="w-full py-2 px-4 bg-brand-purple text-white rounded-full hover:bg-brand-purple/90 transition-colors mb-6"
