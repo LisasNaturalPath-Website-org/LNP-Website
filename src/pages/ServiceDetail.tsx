@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { Calendar, ChevronRight, CheckCircle2, ArrowLeft, Clock, ShieldCheck, X } from 'lucide-react';
 import { getServiceBySlug, servicesData, ServiceItem } from '../data/servicesData';
 import { supabase } from '../lib/supabase';
