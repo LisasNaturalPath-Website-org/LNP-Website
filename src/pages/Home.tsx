@@ -1,15 +1,10 @@
 import React, { useState } from 'react';
 import { 
-  Leaf, 
   MapPin, 
   Calendar, 
   ShoppingBag, 
   Star, 
-  Clock, 
   Mail,
-  Facebook,
-  Instagram,
-  Youtube,
   ChevronRight
 } from 'lucide-react';
 import { Link } from 'react-router-dom';

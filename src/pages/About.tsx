@@ -1,5 +1,4 @@
-import React from 'react';
-import { Award, Users, Heart, Leaf, Calendar, ChevronRight, Radio, Tv, Clock } from 'lucide-react';
+import { Users, Heart, Leaf, Calendar, ChevronRight, Radio, Tv, Clock } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import backgroundLavender from '../../assets/background-Lavender-header.png';
 import lisaAtDesk from '../../assets/Lisa_at-desk.jpg';
