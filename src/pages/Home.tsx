@@ -117,6 +117,12 @@ export function Home() {
             </div>
           </div>
 
+          <div className="my-8 text-center md:my-10">
+            <p className="mx-auto max-w-3xl text-base leading-relaxed text-gray-700 sm:text-lg">
+              Serving Butler, Shanor-Northvue, and surrounding areas, we partner with you to support your body's innate healing ability and reach your highest health potential.
+            </p>
+          </div>
+
           <div className="mt-10 text-center">
             <h2 className="text-3xl font-serif font-bold text-brand-purple sm:text-4xl">Our Wellness Services</h2>
             <p className="mx-auto mt-3 max-w-2xl text-gray-600">
