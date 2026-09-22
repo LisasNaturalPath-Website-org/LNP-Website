@@ -61,8 +61,20 @@ export const servicesData: ServiceItem[] = [
         description: "Targets muscle knots; increases circulation, lymphatic flow, mobility, and provides pain relief."
       },
       {
-        name: "Hot Stone Massage",
-        description: "Uses heated stones to stimulate circulation, relieve knots and stiff muscles, and relax the entire body with warmth and energy."
+        name: "Cupping",
+        description: "Uses suction cups to draw blood to specific areas, reducing muscle tension, promoting circulation, and supporting natural healing."
+      },
+      {
+        name: "Aromatherapy Massage",
+        description: "Combines gentle massage techniques with carefully selected essential oils to enhance relaxation, relieve stress, and balance the body and mind."
+      },
+      {
+        name: "Pregnancy Massage",
+        description: "A safe, nurturing massage tailored for expectant mothers to ease pregnancy-related discomfort, reduce swelling, and promote restful relaxation."
+      },
+      {
+        name: "Lymphatic Massage",
+        description: "Gentle, rhythmic strokes that stimulate lymph flow, reduce swelling, support detoxification, and strengthen immune function."
       },
       {
         name: "Reflexology (Zone Therapy)",
