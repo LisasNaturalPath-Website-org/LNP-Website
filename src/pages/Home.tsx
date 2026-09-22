@@ -91,26 +91,79 @@ export function Home() {
         </div>
       </section>
 
-      {/* Services Section */}
-      <section 
-        className="relative py-12 md:py-16 bg-cover bg-center"
-        style={{
-          backgroundImage: 'url("https://images.unsplash.com/photo-1544161515-4ab6ce6db874?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80")',
-          backgroundAttachment: 'fixed'
-        }}
-      >
-        <div className="absolute inset-0 bg-black/60"></div>
-        <div className="relative max-w-4xl mx-auto px-4 text-center text-white z-10">
-          <h2 className="text-lg sm:text-xl md:text-2xl font-sans font-medium mb-8 max-w-3xl mx-auto leading-relaxed text-white/95">
-            Serving Butler, Shanor-Northvue, and surrounding areas, Lisa's Natural Path is your trusted Holistic Practitioner and wellness center. Our Traditional Naturopathic Practitioner and skilled Licensed Massage Therapist provide natural solutions for pain relief, hormone testing, allergy elimination, colon hydrotherapy, and complete health evaluations. We partner with you to achieve your highest health potential through the body's innate healing ability.
-          </h2>
-          <Link
-            to="/services"
-            className="inline-flex items-center bg-white hover:bg-white/90 text-brand-purple px-8 py-3.5 rounded-full text-lg font-semibold transition-colors shadow-md hover:shadow-lg"
-          >
-            Our Services
-            <ChevronRight className="ml-2" size={20} />
-          </Link>
+      {/* Featured Services */}
+      <section className="bg-gray-50 px-4 py-16 md:py-20">
+        <div className="mx-auto max-w-6xl">
+          <div className="relative overflow-hidden rounded-3xl bg-brand-purple px-6 py-10 text-center text-white shadow-xl sm:px-10 md:py-14">
+            <div className="absolute -right-16 -top-20 h-56 w-56 rounded-full bg-white/10" aria-hidden="true" />
+            <div className="absolute -bottom-28 -left-12 h-64 w-64 rounded-full bg-brand-green/20" aria-hidden="true" />
+            <div className="relative mx-auto max-w-3xl">
+              <span className="inline-flex rounded-full border border-white/30 bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-white">
+                Featured Specialty Services
+              </span>
+              <h2 className="mt-5 text-3xl font-serif font-bold leading-tight sm:text-4xl">
+                Targeted Hormone Testing & Computerized Allergy Scans
+              </h2>
+              <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-white/90 sm:text-lg">
+                Pinpoint the root causes of fatigue, chronic pain, and digestive imbalance with advanced diagnostic testing.
+              </p>
+              <Link
+                to="/services/thermography-scans"
+                className="mt-7 inline-flex items-center rounded-full bg-white px-6 py-3 font-semibold text-brand-purple shadow-md transition-all hover:-translate-y-0.5 hover:bg-gray-100 hover:shadow-lg"
+              >
+                Learn About Diagnostic Testing
+                <ChevronRight className="ml-2" size={19} />
+              </Link>
+            </div>
+          </div>
+
+          <div className="mt-10 text-center">
+            <h2 className="text-3xl font-serif font-bold text-brand-purple sm:text-4xl">Our Wellness Services</h2>
+            <p className="mx-auto mt-3 max-w-2xl text-gray-600">
+              Personalized natural health support from our practitioner, wellness center, and massage team.
+            </p>
+          </div>
+
+          <div className="mt-8 grid gap-6 md:grid-cols-3">
+            <div className="flex flex-col rounded-2xl border-2 border-brand-purple/20 bg-white p-7 shadow-lg transition-all hover:-translate-y-1 hover:border-brand-purple/40 hover:shadow-xl">
+              <h3 className="text-2xl font-serif font-bold text-brand-purple">Holistic Medicine Practitioner</h3>
+              <p className="mt-2 font-medium text-brand-green">Hormone Testing & Allergy Scans</p>
+              <ul className="mt-6 space-y-3 text-gray-700">
+                <li className="flex gap-3"><span className="text-brand-purple">•</span>Functional Hormone Assessments</li>
+                <li className="flex gap-3"><span className="text-brand-purple">•</span>Computerized Allergy & Health Scans</li>
+                <li className="flex gap-3"><span className="text-brand-purple">•</span>Digital Body Thermography</li>
+              </ul>
+              <Link to="/services" className="mt-7 inline-flex items-center font-semibold text-brand-purple transition-colors hover:text-brand-green">
+                View Practitioner Services <ChevronRight className="ml-1" size={18} />
+              </Link>
+            </div>
+
+            <div className="flex flex-col rounded-2xl border border-gray-200 bg-white p-7 shadow-lg transition-all hover:-translate-y-1 hover:border-brand-green/50 hover:shadow-xl">
+              <h3 className="text-2xl font-serif font-bold text-brand-purple">Wellness Center</h3>
+              <p className="mt-2 font-medium text-brand-green">Colon Hydrotherapy & Detox Therapies</p>
+              <ul className="mt-6 space-y-3 text-gray-700">
+                <li className="flex gap-3"><span className="text-brand-green">•</span>Colon Hydrotherapy</li>
+                <li className="flex gap-3"><span className="text-brand-green">•</span>Far Infrared Sauna & Foot Soaks</li>
+                <li className="flex gap-3"><span className="text-brand-green">•</span>Harmonic Wave & Ear Candling</li>
+              </ul>
+              <Link to="/services/colon-hydrotherapy" className="mt-7 inline-flex items-center font-semibold text-brand-purple transition-colors hover:text-brand-green">
+                Explore Wellness Center <ChevronRight className="ml-1" size={18} />
+              </Link>
+            </div>
+
+            <div className="flex flex-col rounded-2xl border border-gray-200 bg-white p-7 shadow-lg transition-all hover:-translate-y-1 hover:border-brand-green/50 hover:shadow-xl">
+              <h3 className="text-2xl font-serif font-bold text-brand-purple">Licensed Massage Therapist</h3>
+              <p className="mt-2 font-medium text-brand-green">Therapeutic & Deep Tissue Bodywork</p>
+              <ul className="mt-6 space-y-3 text-gray-700">
+                <li className="flex gap-3"><span className="text-brand-green">•</span>Deep Tissue & Swedish Massage</li>
+                <li className="flex gap-3"><span className="text-brand-green">•</span>Lymphatic & Cupping Therapy</li>
+                <li className="flex gap-3"><span className="text-brand-green">•</span>Reflexology & Aromatherapy</li>
+              </ul>
+              <Link to="/services/massage-reflexology" className="mt-7 inline-flex items-center font-semibold text-brand-purple transition-colors hover:text-brand-green">
+                Book Massage Therapy <ChevronRight className="ml-1" size={18} />
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
 
