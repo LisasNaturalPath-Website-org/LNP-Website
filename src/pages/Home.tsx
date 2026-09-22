@@ -152,7 +152,7 @@ export function Home() {
                 <li className="flex gap-3"><span className="text-brand-green">•</span>Far Infrared Sauna & Foot Soaks</li>
                 <li className="flex gap-3"><span className="text-brand-green">•</span>Harmonic Wave & Ear Candling</li>
               </ul>
-              <Link to="/services/services" className="mt-7 inline-flex items-center font-semibold text-brand-purple transition-colors hover:text-brand-green">
+              <Link to="/services" className="mt-7 inline-flex items-center font-semibold text-brand-purple transition-colors hover:text-brand-green">
                 Explore Wellness Center <ChevronRight className="ml-1" size={18} />
               </Link>
             </div>
