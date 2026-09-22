@@ -3,7 +3,6 @@ import { useParams, Link } from 'react-router-dom';
 import { Calendar, ChevronRight, CheckCircle2, ArrowLeft, Clock, ShieldCheck, X } from 'lucide-react';
 import { getServiceBySlug, servicesData, ServiceItem } from '../data/servicesData';
 import { supabase } from '../lib/supabase';
-import backgroundLavender from '../../assets/background-Lavender-header.png';
 
 interface BookingFormProps {
   service: ServiceItem;
@@ -220,15 +219,9 @@ export function ServiceDetail() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header Banner */}
-      <section 
-        className="relative py-12 md:py-16 bg-cover bg-center bg-no-repeat flex items-center justify-center overflow-hidden"
-        style={{
-          backgroundImage: `url(${backgroundLavender})`,
-        }}
-      >
-        <div className="absolute inset-0 bg-brand-purple/40 backdrop-blur-[1px] z-10"></div>
-        <div className="relative z-20 text-center text-white px-4 max-w-4xl mx-auto">
+      {/* Header */}
+      <section className="bg-brand-purple py-12 md:py-16">
+        <div className="text-center text-white px-4 max-w-4xl mx-auto">
           {/* Breadcrumb */}
           <div className="flex items-center justify-center gap-2 text-sm text-white/80 mb-3">
             <Link to="/" className="hover:underline">Home</Link>
@@ -237,7 +230,7 @@ export function ServiceDetail() {
             <ChevronRight size={14} />
             <span className="text-white font-medium">{service.title}</span>
           </div>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold drop-shadow-md mb-2">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold mb-2">
             {service.title}
           </h1>
         </div>
