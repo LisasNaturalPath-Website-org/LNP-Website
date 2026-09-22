@@ -108,7 +108,7 @@ export function Home() {
                 Pinpoint the root causes of fatigue, chronic pain, and digestive imbalance with advanced diagnostic testing.
               </p>
               <Link
-                to="/services/thermography-scans"
+                to="/services/bioenergetic-testing-zyto"
                 className="mt-7 inline-flex items-center rounded-full bg-white px-6 py-3 font-semibold text-brand-purple shadow-md transition-all hover:-translate-y-0.5 hover:bg-gray-100 hover:shadow-lg"
               >
                 Learn About Diagnostic Testing
