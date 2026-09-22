@@ -220,7 +220,7 @@ export function ServiceDetail() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <section className="bg-brand-purple py-12 md:py-16">
+      <section className="bg-brand-purple py-4 md:py-6">
         <div className="text-center text-white px-4 max-w-4xl mx-auto">
           {/* Breadcrumb */}
           <div className="flex items-center justify-center gap-2 text-sm text-white/80 mb-3">

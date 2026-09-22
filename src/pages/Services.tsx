@@ -6,7 +6,7 @@ export const Services: React.FC = () => {
   return (
     <div className="min-h-screen bg-stone-50">
       {/* Hero Banner Section */}
-      <section className="py-12 md:py-16 bg-brand-purple flex items-center justify-center overflow-hidden">
+      <section className="py-6 md:py-8 bg-brand-purple flex items-center justify-center overflow-hidden">
         <div className="text-center text-white px-4 max-w-4xl mx-auto">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold drop-shadow-md mb-3">Our Services</h1>
           <p className="text-lg md:text-xl max-w-2xl mx-auto text-white/90">
