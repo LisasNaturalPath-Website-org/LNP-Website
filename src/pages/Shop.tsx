@@ -25,7 +25,7 @@ export const Shop: React.FC = () => {
       {/* Header */}
       <section className="bg-brand-purple text-white py-4 md:py-6 flex items-center justify-center">
         <div className="text-center px-4">
-          <h1 className="text-3xl md:text-4xl font-serif mb-2">Our Collections</h1>
+          <h1 className="text-3xl md:text-4xl font-serif mb-2">Lisa&apos;s Online Shop</h1>
           <p className="text-sm md:text-base max-w-2xl mx-auto">
             Choose from our thoughtfully curated categories, each designed to support your natural wellness journey.
           </p>
