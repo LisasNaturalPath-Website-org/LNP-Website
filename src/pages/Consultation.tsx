@@ -280,16 +280,18 @@ export function Consultation() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
-      <div className="max-w-4xl mx-auto px-4">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-serif text-brand-purple mb-6">Book a Consultation</h1>
-          <p className="text-xl text-gray-600">
+    <div className="min-h-screen bg-gray-50">
+      {/* Header */}
+      <section className="bg-brand-purple text-white py-4 md:py-6 flex items-center justify-center">
+        <div className="text-center px-4">
+          <h1 className="text-3xl md:text-4xl font-serif mb-2">Book a Consultation</h1>
+          <p className="text-sm md:text-base max-w-2xl mx-auto">
             Take the first step towards optimal health with a personalized consultation
           </p>
         </div>
+      </section>
 
+      <div className="max-w-4xl mx-auto px-4 py-12">
         {/* Consultation Types */}
         <div className="grid md:grid-cols-2 gap-6">
           {consultationTypes.map((consultation) => (
