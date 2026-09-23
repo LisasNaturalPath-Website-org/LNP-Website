@@ -62,7 +62,7 @@ export function Home() {
               Naturopathic Practitioner in Butler, PA
             </h1>
             <p className="text-lg sm:text-xl md:text-2xl text-gray-800 font-medium mb-10 max-w-2xl mx-auto leading-relaxed">
-              Premium Herbal Remedies, Supplements & Wellness Support for Your Natural Health Journey
+              Partnering with you to restore balance through natural health.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Link 
@@ -119,7 +119,7 @@ export function Home() {
 
           <div className="my-8 text-center md:my-10">
             <p className="mx-auto max-w-3xl text-base leading-relaxed text-gray-700 sm:text-lg">
-              Serving Butler, Shanor-Northvue, and surrounding areas, we partner with you to support your body's innate healing ability and reach your highest health potential.
+              Lisa's Natural Path Serves the Butler, Shanor-Northvue, and surrounding areas, we partner with you to support your body's innate healing ability and reach your highest health potential.
             </p>
           </div>
 
