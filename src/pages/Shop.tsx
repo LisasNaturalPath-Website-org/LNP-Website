@@ -21,15 +21,18 @@ const categories = [
 
 export const Shop: React.FC = () => {
   return (
-    <div className="max-w-7xl mx-auto px-4 py-12">
+    <div className="min-h-screen">
       {/* Header */}
-      <div className="text-center mb-16">
-        <h1 className="text-5xl font-serif text-brand-purple mb-6">Our Collections</h1>
-        <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-          Choose from our thoughtfully curated categories, each designed to support your natural wellness journey.
-        </p>
-      </div>
+      <section className="bg-brand-purple text-white py-4 md:py-6 flex items-center justify-center">
+        <div className="text-center px-4">
+          <h1 className="text-3xl md:text-4xl font-serif mb-2">Our Collections</h1>
+          <p className="text-sm md:text-base max-w-2xl mx-auto">
+            Choose from our thoughtfully curated categories, each designed to support your natural wellness journey.
+          </p>
+        </div>
+      </section>
 
+      <div className="max-w-7xl mx-auto px-4 py-12">
       {/* Categories Grid */}
       <div className="grid md:grid-cols-2 gap-12">
         {categories.map((category) => (
@@ -56,6 +59,7 @@ export const Shop: React.FC = () => {
             </div>
           </div>
         ))}
+      </div>
       </div>
     </div>
   );

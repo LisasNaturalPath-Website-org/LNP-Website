@@ -104,15 +104,18 @@ export const LifestyleEssentials: React.FC = () => {
     });
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-12">
+    <div className="min-h-screen">
       {/* Header */}
-      <div className="text-center mb-12">
-        <h1 className="text-4xl font-serif text-brand-purple mb-4">Lifestyle Essentials</h1>
-        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-          Explore our collection of mindfully curated lifestyle products designed to enhance your daily wellness routine.
-        </p>
-      </div>
+      <section className="bg-brand-purple text-white py-4 md:py-6 flex items-center justify-center">
+        <div className="text-center px-4">
+          <h1 className="text-3xl md:text-4xl font-serif mb-2">Lifestyle Essentials</h1>
+          <p className="text-sm md:text-base max-w-2xl mx-auto">
+            Explore our collection of mindfully curated lifestyle products designed to enhance your daily wellness routine.
+          </p>
+        </div>
+      </section>
 
+      <div className="max-w-7xl mx-auto px-4 py-12">
       {/* Filters and Sort */}
       <div className="flex flex-col md:flex-row justify-between items-start gap-4 mb-8">
         <div className="flex items-center gap-4 w-full md:w-auto">
@@ -242,6 +245,7 @@ export const LifestyleEssentials: React.FC = () => {
             </div>
           </div>
         ))}
+      </div>
       </div>
     </div>
   );
