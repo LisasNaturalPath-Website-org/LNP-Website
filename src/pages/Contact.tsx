@@ -47,10 +47,10 @@ export function Contact() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <section className="bg-brand-purple text-white py-20">
+      <section className="bg-brand-purple text-white py-4 md:py-6">
         <div className="max-w-6xl mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-5xl font-serif mb-6">Contact Us</h1>
-          <p className="text-xl max-w-2xl mx-auto">
+          <h1 className="text-3xl md:text-4xl font-serif mb-2">Contact Us</h1>
+          <p className="text-sm md:text-base max-w-2xl mx-auto">
             We're here to help you on your wellness journey. Reach out to us with any questions or concerns.
           </p>
         </div>

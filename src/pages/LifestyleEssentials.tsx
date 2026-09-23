@@ -1,29 +1,32 @@
 import React, { useState } from 'react';
-import { Filter, SlidersHorizontal, ChevronDown, Star } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { ArrowLeft, Filter, SlidersHorizontal, ChevronDown, Star } from 'lucide-react';
 
 const products = [
   {
     id: 1,
-    name: "Organic Bamboo Tea Set",
-    price: 49.99,
+    name: "All Natural Glade plug in replacements",
+    price: 6.5,
+    priceDisplay: "$6.50 - $9.00",
     rating: 4.8,
     reviews: 156,
-    image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
-    category: "Tea & Wellness",
-    description: "Complete tea ceremony set made from sustainable bamboo.",
-    tags: ["eco-friendly", "tea ceremony", "bamboo"],
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/VanPeppermint-212-1TOtHtNo1IYWGQ7vrrIVuxxwrg6fld.jpg",
+    category: "Aromatherapy",
+    description: "100% Natural Plug in Air Fresheners",
+    tags: ["natural", "air freshener", "peppermint"],
     inStock: true
   },
   {
     id: 2,
-    name: "Meditation Cushion Set",
-    price: 79.99,
+    name: "Bracelets",
+    price: 20.00,
     rating: 4.9,
     reviews: 92,
-    image: "https://images.unsplash.com/photo-1545205597-3d9d02c29597?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
-    category: "Meditation",
-    description: "Ergonomic meditation cushion set with natural cotton covers.",
-    tags: ["meditation", "comfort", "ergonomic"],
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Bracelet-Amethyst-vLd4SIAl0g3MF5RfB8NqCiblAN91qt.jpg",
+    category: "Jewelry",
+    description: "Custom hand-made bracelets",
+    tags: ["bracelets", "hand-made", "amethyst"],
+    buttonLabel: "Shop Bracelets",
     inStock: true
   },
   {
@@ -104,15 +107,18 @@ export const LifestyleEssentials: React.FC = () => {
     });
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-12">
+    <div className="min-h-screen">
       {/* Header */}
-      <div className="text-center mb-12">
-        <h1 className="text-4xl font-serif text-brand-purple mb-4">Lifestyle Essentials</h1>
-        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-          Explore our collection of mindfully curated lifestyle products designed to enhance your daily wellness routine.
-        </p>
-      </div>
+      <section className="bg-brand-purple text-white py-4 md:py-6 flex items-center justify-center">
+        <div className="text-center px-4">
+          <h1 className="text-3xl md:text-4xl font-serif mb-2">Lifestyle Essentials</h1>
+          <p className="text-sm md:text-base max-w-2xl mx-auto">
+            Explore our collection of mindfully curated lifestyle products designed to enhance your daily wellness routine.
+          </p>
+        </div>
+      </section>
 
+      <div className="max-w-7xl mx-auto px-4 py-12">
       {/* Filters and Sort */}
       <div className="flex flex-col md:flex-row justify-between items-start gap-4 mb-8">
         <div className="flex items-center gap-4 w-full md:w-auto">
@@ -202,7 +208,7 @@ export const LifestyleEssentials: React.FC = () => {
             <div className="p-6">
               <div className="flex justify-between items-start mb-2">
                 <h3 className="text-xl font-semibold text-gray-800">{product.name}</h3>
-                <span className="text-xl font-bold text-brand-purple">${product.price}</span>
+                <span className="text-xl font-bold text-brand-purple">{product.priceDisplay ?? `$${product.price.toFixed(2)}`}</span>
               </div>
               <p className="text-gray-600 text-sm mb-4">{product.description}</p>
               <div className="flex items-center gap-2 mb-4">
@@ -237,11 +243,22 @@ export const LifestyleEssentials: React.FC = () => {
                     : 'bg-gray-200 text-gray-500 cursor-not-allowed'
                 }`}
               >
-                {product.inStock ? 'Add to Cart' : 'Out of Stock'}
+                {product.inStock ? (product.buttonLabel ?? 'Add to Cart') : 'Out of Stock'}
               </button>
             </div>
           </div>
         ))}
+      </div>
+
+      <div className="flex justify-center pt-10">
+        <Link
+          to="/shop"
+          className="inline-flex items-center gap-2 rounded-full bg-brand-purple px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-brand-purple/90"
+        >
+          <ArrowLeft size={18} aria-hidden="true" />
+          Back to Shop
+        </Link>
+      </div>
       </div>
     </div>
   );

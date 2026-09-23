@@ -1,20 +1,14 @@
 import { Users, Heart, Leaf, Calendar, ChevronRight, Radio, Tv, Clock } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import backgroundLavender from '../../assets/background-Lavender-header.png';
 import lisaAtDesk from '../../assets/Lisa_at-desk.jpg';
 
 export function About() {
   return (
     <div>
       {/* Hero Banner Section */}
-      <section className="relative py-10 md:py-14 bg-cover bg-center bg-no-repeat flex items-center justify-center overflow-hidden"
-        style={{
-          backgroundImage: `url(${backgroundLavender})`,
-        }}
-      >
-        <div className="absolute inset-0 bg-brand-purple/40 backdrop-blur-[1px] z-10"></div>
-        <div className="relative z-20 text-center text-white px-4">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold drop-shadow-md">About Lisa's Natural Path</h1>
+      <section className="bg-brand-purple text-white py-4 md:py-6 flex items-center justify-center">
+        <div className="text-center px-4">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold">About Lisa's Natural Path</h1>
         </div>
       </section>
 
