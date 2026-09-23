@@ -18,14 +18,15 @@ const products = [
   },
   {
     id: 2,
-    name: "Meditation Cushion Set",
-    price: 79.99,
+    name: "Bracelets",
+    price: 20.00,
     rating: 4.9,
     reviews: 92,
-    image: "https://images.unsplash.com/photo-1545205597-3d9d02c29597?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
-    category: "Meditation",
-    description: "Ergonomic meditation cushion set with natural cotton covers.",
-    tags: ["meditation", "comfort", "ergonomic"],
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Bracelet-Amethyst-vLd4SIAl0g3MF5RfB8NqCiblAN91qt.jpg",
+    category: "Jewelry",
+    description: "Custom hand-made bracelets",
+    tags: ["bracelets", "hand-made", "amethyst"],
+    buttonLabel: "Shop Bracelets",
     inStock: true
   },
   {
@@ -242,7 +243,7 @@ export const LifestyleEssentials: React.FC = () => {
                     : 'bg-gray-200 text-gray-500 cursor-not-allowed'
                 }`}
               >
-                {product.inStock ? 'Add to Cart' : 'Out of Stock'}
+                {product.inStock ? (product.buttonLabel ?? 'Add to Cart') : 'Out of Stock'}
               </button>
             </div>
           </div>
