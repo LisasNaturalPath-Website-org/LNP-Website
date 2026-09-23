@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Filter, SlidersHorizontal, ChevronDown, Star } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { ArrowLeft, Filter, SlidersHorizontal, ChevronDown, Star } from 'lucide-react';
 import probioticEleven from '../../assets/supplements/NaturesSunshine_ProbioticEleven.png';
 import chlorophyllPacks from '../../assets/supplements/NaturesSunshine_Chlorophyll-detox-stick-pack.png';
 import calmDay from '../../assets/supplements/NutritionalFrontiers_CalmDay_120ct.png';
@@ -214,6 +215,16 @@ export const NaturalSupplements: React.FC = () => {
             </div>
           </div>
         ))}
+      </div>
+
+      <div className="flex justify-center pt-10">
+        <Link
+          to="/shop"
+          className="inline-flex items-center gap-2 rounded-full bg-brand-purple px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-brand-purple/90"
+        >
+          <ArrowLeft size={18} aria-hidden="true" />
+          Back to Shop
+        </Link>
       </div>
       </div>
     </div>
