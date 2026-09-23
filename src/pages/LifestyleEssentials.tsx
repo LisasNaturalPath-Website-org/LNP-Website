@@ -5,14 +5,15 @@ import { ArrowLeft, Filter, SlidersHorizontal, ChevronDown, Star } from 'lucide-
 const products = [
   {
     id: 1,
-    name: "Organic Bamboo Tea Set",
-    price: 49.99,
+    name: "All Natural Glade plug in replacements",
+    price: 6.5,
+    priceDisplay: "$6.50 - $9.00",
     rating: 4.8,
     reviews: 156,
-    image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
-    category: "Tea & Wellness",
-    description: "Complete tea ceremony set made from sustainable bamboo.",
-    tags: ["eco-friendly", "tea ceremony", "bamboo"],
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/VanPeppermint-212-1TOtHtNo1IYWGQ7vrrIVuxxwrg6fld.jpg",
+    category: "Aromatherapy",
+    description: "100% Natural Plug in Air Fresheners",
+    tags: ["natural", "air freshener", "peppermint"],
     inStock: true
   },
   {
@@ -206,7 +207,7 @@ export const LifestyleEssentials: React.FC = () => {
             <div className="p-6">
               <div className="flex justify-between items-start mb-2">
                 <h3 className="text-xl font-semibold text-gray-800">{product.name}</h3>
-                <span className="text-xl font-bold text-brand-purple">${product.price}</span>
+                <span className="text-xl font-bold text-brand-purple">{product.priceDisplay ?? `$${product.price.toFixed(2)}`}</span>
               </div>
               <p className="text-gray-600 text-sm mb-4">{product.description}</p>
               <div className="flex items-center gap-2 mb-4">
