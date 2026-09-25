@@ -7,16 +7,14 @@ export default defineConfig(({ mode }) => {
   // JWT_2 (Supabase anon public key) onto the VITE_ vars the app reads.
   const env = { ...process.env, ...loadEnv(mode, process.cwd(), '') };
 
-  const supabaseUrl =
-    env.VITE_SUPABASE_URL || 'https://zlgnlxuooqanrqpiwfyv.supabase.co';
-  const supabaseAnonKey =
-    env.VITE_SUPABASE_ANON_KEY || env.JWT_2 || '';
+  const supabaseUrl = env.NEXT_PUBLIC_SUPABASE_URL || '';
+  const supabaseAnonKey = env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
 
   return {
     plugins: [react()],
     define: {
-      'import.meta.env.VITE_SUPABASE_URL': JSON.stringify(supabaseUrl),
-      'import.meta.env.VITE_SUPABASE_ANON_KEY': JSON.stringify(supabaseAnonKey),
+      'process.env.NEXT_PUBLIC_SUPABASE_URL': JSON.stringify(supabaseUrl),
+      'process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY': JSON.stringify(supabaseAnonKey),
     },
     resolve: {
       alias: {
