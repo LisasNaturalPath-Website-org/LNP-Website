@@ -123,18 +123,17 @@ export function Consultation() {
 
     try {
       const { error } = await supabase
-        .from('service_bookings')
+        .from('lnp_bookings')
         .insert([{
-          name: formData.name,
+          full_name: formData.name,
           email: formData.email,
           phone: formData.phone,
-          notes: formData.concerns,
+          health_concerns: formData.concerns,
           service_title: consultationDetails.title,
-          service_type: selectedType,
           duration: consultationDetails.duration,
           price: consultationDetails.price,
-          preferred_date: selectedDate,
-          preferred_time: selectedTime,
+          booking_date: selectedDate,
+          booking_time: selectedTime,
           status: 'new'
         }]);
 

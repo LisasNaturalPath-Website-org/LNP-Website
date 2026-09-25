@@ -17,6 +17,7 @@ const BookingForm: React.FC<BookingFormProps> = ({ service, onClose, onSuccess }
     phone: '',
     service_type: service.types ? service.types[0].name : service.title,
     duration: service.pricing ? (service.pricing[0].duration || service.pricing[0].name || '30 minutes') : '30 minutes',
+    price: service.pricing ? (service.pricing[0].price || '') : '',
     preferred_date: '',
     preferred_time: '',
     notes: ''
@@ -29,11 +30,26 @@ const BookingForm: React.FC<BookingFormProps> = ({ service, onClose, onSuccess }
     setStatus('loading');
 
     try {
+      const serviceTitle =
+        service.types && service.types.length > 0
+          ? `${service.title} - ${formData.service_type}`
+          : service.title;
+
+      // The price column is numeric; strip currency symbols/text (e.g. "$150") to a number.
+      const numericPrice = parseFloat(String(formData.price).replace(/[^0-9.]/g, ''));
+
       const { error } = await supabase
-        .from('service_bookings')
+        .from('lnp_bookings')
         .insert([{
-          ...formData,
-          service_title: service.title,
+          full_name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          health_concerns: formData.notes,
+          service_title: serviceTitle,
+          duration: formData.duration,
+          price: Number.isNaN(numericPrice) ? null : numericPrice,
+          booking_date: formData.preferred_date,
+          booking_time: formData.preferred_time,
           status: 'new'
         }]);
 
@@ -119,7 +135,12 @@ const BookingForm: React.FC<BookingFormProps> = ({ service, onClose, onSuccess }
                 <label className="block text-gray-700 font-medium mb-1.5 text-sm">Duration / Package</label>
                 <select
                   value={formData.duration}
-                  onChange={(e) => setFormData({ ...formData, duration: e.target.value })}
+                  onChange={(e) => {
+                    const selected = service.pricing!.find(
+                      (p) => (p.duration || p.name || 'Standard') === e.target.value
+                    );
+                    setFormData({ ...formData, duration: e.target.value, price: selected?.price || '' });
+                  }}
                   className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-brand-purple focus:border-brand-purple outline-none"
                   required
                 >
