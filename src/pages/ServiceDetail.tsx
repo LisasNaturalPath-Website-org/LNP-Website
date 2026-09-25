@@ -30,7 +30,7 @@ const BookingForm: React.FC<BookingFormProps> = ({ service, onClose, onSuccess }
 
     try {
       const { error } = await supabase
-        .from('service_bookings')
+        .from('lnp_bookings')
         .insert([{
           ...formData,
           service_title: service.title,
