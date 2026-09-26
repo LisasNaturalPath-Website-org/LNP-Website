@@ -123,7 +123,7 @@ export function Home() {
             </p>
           </div>
 
-          <div className="mt-10 text-center">
+          <div className="mt-20 text-center">
             <h2 className="text-3xl font-serif font-bold text-brand-purple sm:text-4xl">Our Wellness Services</h2>
             <p className="mx-auto mt-3 max-w-2xl text-gray-600">
               Personalized natural health support from our practitioner, wellness center, and massage team.
