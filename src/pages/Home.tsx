@@ -41,10 +41,11 @@ export function Home() {
 
   return (
     <div>
-      {/* Hero Section */}
+      {/* Hero Section — critical sizing & background inlined to avoid Tailwind load race */}
       <section
-        className="relative w-full min-h-screen flex items-center justify-center overflow-hidden py-16"
+        className="relative w-full flex items-center justify-center overflow-hidden py-16"
         style={{
+          minHeight: '100vh',
           backgroundImage: `url(${lavenderHeroBg})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
