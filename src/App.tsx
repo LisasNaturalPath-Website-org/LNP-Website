@@ -11,6 +11,7 @@ import { ServiceDetail } from './pages/ServiceDetail';
 import { Location } from './pages/Location';
 import { Consultation } from './pages/Consultation';
 import { AdminDashboard } from './pages/AdminDashboard';
+import { EmailList } from './pages/EmailList';
 import { ScrollToTop } from './components/ScrollToTop';
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
         <Route path="/location" element={<Layout><Location /></Layout>} />
         <Route path="/consultation" element={<Layout><Consultation /></Layout>} />
         <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/admin/email-list" element={<EmailList />} />
       </Routes>
     </>
   );

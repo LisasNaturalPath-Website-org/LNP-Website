@@ -22,6 +22,9 @@ type Appointment = { time: string; date: string; name: string; phone: string; em
 
 const appointmentColors = ['bg-brand-purple', 'bg-brand-green', 'bg-amber-500'];
 
+const ADMIN_EMAIL = 'lnpfrontdesk@lisasnaturalpath.com';
+const ADMIN_PASSWORD = 'admin';
+
 export function AdminDashboard() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [email, setEmail] = useState('');
@@ -150,7 +153,7 @@ export function AdminDashboard() {
         </div>
         <div className="mt-12 flex flex-col gap-2">
           <div className="flex items-center gap-3 rounded-xl bg-white/15 px-4 py-3 font-medium"><CalendarDays size={19} /> Overview</div>
-          <div className="flex items-center gap-3 rounded-xl px-4 py-3 text-white/70"><Users size={19} /> Email list</div>
+          <Link to="/admin/email-list" className="flex items-center gap-3 rounded-xl px-4 py-3 text-white/70 transition hover:bg-white/10"><Users size={19} /> Email list</Link>
           <div className="flex items-center gap-3 rounded-xl px-4 py-3 text-white/70"><Clock3 size={19} /> Schedule</div>
         </div>
         <AdminMonthCalendar />
