@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 import { AdminMonthCalendar } from '../components/AdminMonthCalendar';
+import { useAdminAuth } from '../contexts/AdminAuthContext';
 import {
   ArrowLeft,
   CalendarDays,
@@ -17,11 +18,8 @@ import {
 
 type Subscriber = { email: string; joined: string; status: string };
 
-const ADMIN_EMAIL = 'lnpfrontdesk@lisasnaturalpath.com';
-const ADMIN_PASSWORD = 'admin';
-
 export function EmailList() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const { isAuthenticated, adminEmail, login, logout } = useAdminAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loginError, setLoginError] = useState('');
@@ -64,12 +62,11 @@ export function EmailList() {
 
   const handleLogin = (event: React.FormEvent) => {
     event.preventDefault();
-    if (email.trim() !== ADMIN_EMAIL || password !== ADMIN_PASSWORD) {
+    if (!login(email, password)) {
       setLoginError('Invalid email or password.');
       return;
     }
     setLoginError('');
-    setIsAuthenticated(true);
   };
 
   if (!isAuthenticated) {
@@ -148,8 +145,8 @@ export function EmailList() {
         <AdminMonthCalendar />
         <div className="mt-auto pt-8 text-sm text-white/75">
           <div className="rounded-2xl bg-white/10 p-4">
-            <p className="font-medium text-white">Owner account</p><p className="mt-1 truncate">{email}</p>
-            <button onClick={() => setIsAuthenticated(false)} className="mt-4 flex items-center gap-2 text-white hover:text-brand-green"><LogOut size={16} /> Sign out</button>
+            <p className="font-medium text-white">Owner account</p><p className="mt-1 truncate">{adminEmail || email}</p>
+            <button onClick={logout} className="mt-4 flex items-center gap-2 text-white hover:text-brand-green"><LogOut size={16} /> Sign out</button>
           </div>
         </div>
       </aside>
