@@ -29,7 +29,7 @@ export function Home() {
     
     try {
       const { error } = await supabase
-        .from('lnp_email_list')
+        .from('lisas_natural_path_email_list')
         .insert([{ email: email }]);
 
       if (error) throw error;

@@ -16,7 +16,7 @@ export function NewsletterForm() {
     
     try {
       const { error } = await supabase
-        .from('lnp_email_list')
+        .from('lisas_natural_path_email_list')
         .insert([{ email: email.trim().toLowerCase() }]);
 
       if (error) throw error;

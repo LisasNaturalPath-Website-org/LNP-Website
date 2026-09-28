@@ -38,25 +38,25 @@ export function AdminDashboard() {
       setIsLoadingData(true);
       setDataError('');
       const [subscriberResult, bookingResult] = await Promise.all([
-        (supabase as any).from('lnp_email_list').select('email, created_at').order('created_at', { ascending: false }),
-        (supabase as any).from('lnp_bookings').select('full_name, service_title, booking_date, booking_time, status').order('booking_date', { ascending: true }),
+        (supabase as any).from('lisas_natural_path_email_list').select('email, created_at, subscribed').order('created_at', { ascending: false }),
+        (supabase as any).from('service_bookings').select('name, service_title, preferred_date, preferred_time, status').order('preferred_date', { ascending: true }),
       ]);
 
       if (subscriberResult.error || bookingResult.error) {
-        setDataError('Live records could not be loaded. Check that the lnp_email_list and lnp_bookings tables are available to this project.');
+        setDataError('Live records could not be loaded. Check that the lisas_natural_path_email_list and service_bookings tables are available to this project.');
         setLiveSubscribers([]);
         setLiveAppointments([]);
       } else {
         setLiveSubscribers((subscriberResult.data ?? []).map((subscriber) => ({
           email: subscriber.email,
           joined: subscriber.created_at ? new Date(subscriber.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Recently joined',
-          status: 'Subscribed',
+          status: subscriber.subscribed === false ? 'Unsubscribed' : 'Subscribed',
         })));
         setLiveAppointments((bookingResult.data ?? []).map((booking, index) => ({
-          time: booking.booking_time || 'Time pending',
-          name: booking.full_name || 'New client',
+          time: booking.preferred_time || 'Time pending',
+          name: booking.name || 'New client',
           service: booking.service_title || 'Wellness appointment',
-          detail: booking.booking_date || 'Date pending',
+          detail: booking.preferred_date || 'Date pending',
           color: appointmentColors[index % appointmentColors.length],
         })));
       }
