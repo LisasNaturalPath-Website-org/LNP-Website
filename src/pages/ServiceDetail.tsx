@@ -39,17 +39,17 @@ const BookingForm: React.FC<BookingFormProps> = ({ service, onClose, onSuccess }
       const numericPrice = parseFloat(String(formData.price).replace(/[^0-9.]/g, ''));
 
       const { error } = await supabase
-        .from('service_bookings')
+        .from('lnp_bookings')
         .insert([{
-          name: formData.name,
+          full_name: formData.name,
           email: formData.email,
           phone: formData.phone,
-          notes: formData.notes,
+          health_concerns: formData.notes,
           service_title: serviceTitle,
           duration: formData.duration,
           price: Number.isNaN(numericPrice) ? null : numericPrice,
-          preferred_date: formData.preferred_date,
-          preferred_time: formData.preferred_time,
+          booking_date: formData.preferred_date,
+          booking_time: formData.preferred_time,
           status: 'new'
         }]);
 

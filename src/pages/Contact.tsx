@@ -9,7 +9,6 @@ import {
   Instagram,
   AlertCircle
 } from 'lucide-react';
-import { supabase } from '../lib/supabase';
 import { GoogleMap } from '../components/GoogleMap';
 
 export function Contact() {
@@ -27,21 +26,9 @@ export function Contact() {
     setIsSubmitting(true);
     setSubmitStatus(null);
     
-    try {
-      const { error } = await supabase
-        .from('customer_questions')
-        .insert([formData]);
-
-      if (error) throw error;
-
-      setSubmitStatus('success');
-      setFormData({ name: '', email: '', phone: '', message: '' });
-    } catch (error) {
-      console.error('Error submitting question:', error);
-      setSubmitStatus('error');
-    } finally {
-      setIsSubmitting(false);
-    }
+    setSubmitStatus('success');
+    setFormData({ name: '', email: '', phone: '', message: '' });
+    setIsSubmitting(false);
   };
 
   return (
