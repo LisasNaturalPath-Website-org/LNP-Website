@@ -38,8 +38,8 @@ export function AdminDashboard() {
 
   const handleLogin = (event: React.FormEvent) => {
     event.preventDefault();
-    if (!email.trim() || !password.trim()) {
-      setLoginError('Enter your email and password to continue.');
+    if (email.trim() !== 'lnpfrontdesk@lisasnaturalpath.com' || password !== 'admin') {
+      setLoginError('Invalid email or password.');
       return;
     }
     setLoginError('');
