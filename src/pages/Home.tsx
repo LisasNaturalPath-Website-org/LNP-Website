@@ -42,7 +42,7 @@ export function Home() {
   return (
     <div>
       {/* Hero Section */}
-      <section className="relative w-full flex items-center justify-center overflow-hidden min-h-[calc(100vh-4rem)] py-16 bg-brand-purple">
+      <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden py-16 bg-brand-purple">
         {/* Full-cover background image layer */}
         <img
           src={lavenderHeroBg}
