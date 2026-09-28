@@ -123,8 +123,14 @@ export function Home() {
             </p>
           </div>
 
-          <div className="mt-10 text-center">
-            <h2 className="text-3xl font-serif font-bold text-brand-purple sm:text-4xl">Our Wellness Services</h2>
+          <div className="mt-20 text-center">
+            <Link
+              to="/services"
+              className="inline-flex items-center rounded-full bg-brand-purple px-7 py-3 text-3xl font-serif font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-brand-purple/90 hover:shadow-lg sm:text-4xl"
+            >
+              Our Wellness Services
+              <ChevronRight className="ml-2" size={28} aria-hidden="true" />
+            </Link>
             <p className="mx-auto mt-3 max-w-2xl text-gray-600">
               Personalized natural health support from our practitioner, wellness center, and massage team.
             </p>
