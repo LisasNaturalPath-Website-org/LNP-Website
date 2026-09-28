@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 import { AdminMonthCalendar } from '../components/AdminMonthCalendar';
 import {
+  ArrowLeft,
   CalendarDays,
   CheckCircle2,
   Clock3,
@@ -127,6 +129,11 @@ export function AdminDashboard() {
               Dashboard records are loaded from your configured Supabase tables after sign-in.
             </p>
           </form>
+          <div className="mt-6 text-center">
+            <Link to="/" className="inline-flex items-center gap-2 text-sm font-medium text-brand-purple transition hover:text-brand-purple/80">
+              <ArrowLeft size={16} /> Back to Home
+            </Link>
+          </div>
         </div>
       </main>
     );
