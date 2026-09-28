@@ -26,6 +26,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
               <Link to="/services" className="text-gray-700 hover:text-brand-purple">Services</Link>
               <Link to="/about" className="text-gray-700 hover:text-brand-purple">About</Link>
               <Link to="/contact" className="text-gray-700 hover:text-brand-purple">Contact</Link>
+              <Link to="/admin" className="text-gray-700 hover:text-brand-purple">Admin</Link>
               <button className="bg-brand-purple text-white p-2 rounded-full">
                 <ShoppingBag size={20} />
               </button>
