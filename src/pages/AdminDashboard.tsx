@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { supabase } from '../lib/supabase';
 import {
   CalendarDays,
   CheckCircle2,
@@ -13,7 +14,7 @@ import {
   X,
 } from 'lucide-react';
 
-const subscribers = [
+const demoSubscribers = [
   { email: 'amanda.williams@gmail.com', joined: 'Sep 24, 2026', status: 'Subscribed' },
   { email: 'jordan.miller@yahoo.com', joined: 'Sep 22, 2026', status: 'Subscribed' },
   { email: 'sarah.bennett@gmail.com', joined: 'Sep 18, 2026', status: 'Subscribed' },
@@ -21,7 +22,7 @@ const subscribers = [
   { email: 'emily.carter@gmail.com', joined: 'Sep 11, 2026', status: 'Subscribed' },
 ];
 
-const appointments = [
+const demoAppointments = [
   { time: '9:00 AM', name: 'Amanda Williams', service: 'Initial Consultation', detail: 'Hormone & wellness assessment', color: 'bg-brand-purple' },
   { time: '11:30 AM', name: 'Jordan Miller', service: 'Colon Hydrotherapy', detail: 'Wellness Center', color: 'bg-brand-green' },
   { time: '2:00 PM', name: 'Sarah Bennett', service: 'Deep Tissue Massage', detail: '60 minute session', color: 'bg-amber-500' },
@@ -35,6 +36,47 @@ export function AdminDashboard() {
   const [loginError, setLoginError] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [menuOpen, setMenuOpen] = useState(false);
+  const [liveSubscribers, setLiveSubscribers] = useState(demoSubscribers);
+  const [liveAppointments, setLiveAppointments] = useState(demoAppointments);
+  const [isLoadingData, setIsLoadingData] = useState(false);
+  const [dataError, setDataError] = useState('');
+
+  useEffect(() => {
+    if (!isAuthenticated) return;
+
+    const loadDashboardData = async () => {
+      setIsLoadingData(true);
+      setDataError('');
+      const [subscriberResult, bookingResult] = await Promise.all([
+        (supabase as any).from('lnp_email_list').select('email, created_at').order('created_at', { ascending: false }),
+        (supabase as any).from('lnp_bookings').select('full_name, service_title, booking_date, booking_time, status').order('booking_date', { ascending: true }),
+      ]);
+
+      if (subscriberResult.error || bookingResult.error) {
+        setDataError('Live records could not be loaded. Showing the latest preview data instead.');
+      } else {
+        if (subscriberResult.data?.length) {
+          setLiveSubscribers(subscriberResult.data.map((subscriber) => ({
+            email: subscriber.email,
+            joined: subscriber.created_at ? new Date(subscriber.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Recently joined',
+            status: 'Subscribed',
+          })));
+        }
+        if (bookingResult.data?.length) {
+          setLiveAppointments(bookingResult.data.map((booking, index) => ({
+            time: booking.booking_time || 'Time pending',
+            name: booking.full_name || 'New client',
+            service: booking.service_title || 'Wellness appointment',
+            detail: booking.booking_date || 'Date pending',
+            color: index % 3 === 1 ? 'bg-brand-green' : index % 3 === 2 ? 'bg-amber-500' : 'bg-brand-purple',
+          })));
+        }
+      }
+      setIsLoadingData(false);
+    };
+
+    void loadDashboardData();
+  }, [isAuthenticated]);
 
   const handleLogin = (event: React.FormEvent) => {
     event.preventDefault();
@@ -97,7 +139,7 @@ export function AdminDashboard() {
     );
   }
 
-  const filteredSubscribers = subscribers.filter((subscriber) => subscriber.email.toLowerCase().includes(searchTerm.toLowerCase()));
+  const filteredSubscribers = liveSubscribers.filter((subscriber) => subscriber.email.toLowerCase().includes(searchTerm.toLowerCase()));
 
   return (
     <div className="min-h-screen bg-[#f7f5f1] text-gray-900">
@@ -126,13 +168,15 @@ export function AdminDashboard() {
         </header>
         <div className="mx-auto max-w-7xl px-5 py-8 sm:px-8">
           <div className="mb-8 sm:hidden"><p className="text-sm text-gray-500">Saturday, September 27, 2026</p><h1 className="mt-1 text-2xl font-semibold text-brand-purple">Good morning, Lisa</h1></div>
+          {dataError && <p className="mb-6 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800" role="status">{dataError}</p>}
+          {isLoadingData && <p className="mb-6 text-sm text-gray-500" role="status">Loading live records...</p>}
           <div className="grid gap-5 md:grid-cols-3">
-            <div className="rounded-2xl bg-brand-purple p-6 text-white shadow-lg"><div className="flex items-center justify-between"><p className="text-sm text-white/75">Today&apos;s appointments</p><CalendarDays size={21} /></div><p className="mt-4 text-4xl font-semibold">4</p><p className="mt-2 text-sm text-white/75">All appointments confirmed</p></div>
+            <div className="rounded-2xl bg-brand-purple p-6 text-white shadow-lg"><div className="flex items-center justify-between"><p className="text-sm text-white/75">Today&apos;s appointments</p><CalendarDays size={21} /></div><p className="mt-4 text-4xl font-semibold">{liveAppointments.length}</p><p className="mt-2 text-sm text-white/75">All appointments confirmed</p></div>
             <div className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-gray-200"><div className="flex items-center justify-between"><p className="text-sm text-gray-500">Email subscribers</p><Mail className="text-brand-green" size={21} /></div><p className="mt-4 text-4xl font-semibold text-brand-purple">128</p><p className="mt-2 text-sm text-brand-green">+12 this month</p></div>
             <div className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-gray-200"><div className="flex items-center justify-between"><p className="text-sm text-gray-500">Next appointment</p><Clock3 className="text-brand-purple" size={21} /></div><p className="mt-4 text-2xl font-semibold text-brand-purple">9:00 AM</p><p className="mt-2 text-sm text-gray-500">Amanda Williams</p></div>
           </div>
 
-          <section className="mt-8 rounded-2xl bg-white p-6 shadow-sm ring-1 ring-gray-200 sm:p-7"><div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center"><div><h2 className="text-2xl font-semibold text-brand-purple">Today&apos;s schedule</h2><p className="mt-1 text-sm text-gray-500">Appointments for September 27, 2026</p></div><button className="inline-flex items-center justify-center gap-2 rounded-lg border border-gray-200 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"><Download size={17} /> Export schedule</button></div><div className="mt-6 grid gap-3">{appointments.map((appointment) => <div key={appointment.time} className="flex items-center gap-4 rounded-xl border border-gray-100 p-4"><div className={`size-2.5 shrink-0 rounded-full ${appointment.color}`} /><div className="w-20 shrink-0 text-sm font-semibold text-gray-500">{appointment.time}</div><div className="min-w-0 flex-1"><p className="font-semibold text-gray-900">{appointment.name}</p><p className="truncate text-sm text-gray-500">{appointment.service} · {appointment.detail}</p></div><CheckCircle2 className="hidden text-brand-green sm:block" size={19} /></div>)}</div></section>
+          <section className="mt-8 rounded-2xl bg-white p-6 shadow-sm ring-1 ring-gray-200 sm:p-7"><div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center"><div><h2 className="text-2xl font-semibold text-brand-purple">Today&apos;s schedule</h2><p className="mt-1 text-sm text-gray-500">Appointments for September 27, 2026</p></div><button className="inline-flex items-center justify-center gap-2 rounded-lg border border-gray-200 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"><Download size={17} /> Export schedule</button></div><div className="mt-6 grid gap-3">{liveAppointments.map((appointment) => <div key={appointment.time} className="flex items-center gap-4 rounded-xl border border-gray-100 p-4"><div className={`size-2.5 shrink-0 rounded-full ${appointment.color}`} /><div className="w-20 shrink-0 text-sm font-semibold text-gray-500">{appointment.time}</div><div className="min-w-0 flex-1"><p className="font-semibold text-gray-900">{appointment.name}</p><p className="truncate text-sm text-gray-500">{appointment.service} · {appointment.detail}</p></div><CheckCircle2 className="hidden text-brand-green sm:block" size={19} /></div>)}</div></section>
 
           <section className="mt-8 rounded-2xl bg-white p-6 shadow-sm ring-1 ring-gray-200 sm:p-7"><div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center"><div><h2 className="text-2xl font-semibold text-brand-purple">Email list</h2><p className="mt-1 text-sm text-gray-500">Recent newsletter subscribers</p></div><div className="flex items-center gap-2 rounded-lg border border-gray-200 px-3 py-2"><Search size={17} className="text-gray-400" /><input value={searchTerm} onChange={(event) => setSearchTerm(event.target.value)} placeholder="Search emails" className="w-full bg-transparent text-sm outline-none sm:w-48" aria-label="Search email subscribers" /></div></div><div className="mt-6 overflow-x-auto"><table className="w-full min-w-[520px] text-left text-sm"><thead className="border-b border-gray-200 text-xs uppercase tracking-wider text-gray-400"><tr><th className="pb-3 font-medium">Email address</th><th className="pb-3 font-medium">Joined</th><th className="pb-3 font-medium">Status</th></tr></thead><tbody>{filteredSubscribers.map((subscriber) => <tr key={subscriber.email} className="border-b border-gray-100 last:border-0"><td className="py-4 font-medium text-gray-800">{subscriber.email}</td><td className="py-4 text-gray-500">{subscriber.joined}</td><td className="py-4"><span className="rounded-full bg-brand-green/10 px-3 py-1 text-xs font-semibold text-brand-green">{subscriber.status}</span></td></tr>)}</tbody></table>{filteredSubscribers.length === 0 && <p className="py-8 text-center text-sm text-gray-500">No subscribers match your search.</p>}</div></section>
         </div>
