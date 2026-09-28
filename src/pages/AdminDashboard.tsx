@@ -13,6 +13,8 @@ import {
   Users,
   X,
 } from 'lucide-react';
+import { Calendar } from '@/components/ui/calendar';
+import { nowInNY } from '@/lib/tz-date';
 
 type Subscriber = { email: string; joined: string; status: string };
 type Appointment = { time: string; name: string; service: string; detail: string; color: string };
@@ -30,6 +32,8 @@ export function AdminDashboard() {
   const [liveAppointments, setLiveAppointments] = useState<Appointment[]>([]);
   const [isLoadingData, setIsLoadingData] = useState(false);
   const [dataError, setDataError] = useState('');
+  const [calendarMonth, setCalendarMonth] = useState(() => nowInNY());
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>(() => nowInNY());
 
   useEffect(() => {
     if (!isAuthenticated) return;
@@ -136,10 +140,20 @@ export function AdminDashboard() {
           <div className="flex items-center gap-3"><Leaf size={27} /><span className="font-serif text-xl">Lisa&apos;s Natural Path</span></div>
           <button className="lg:hidden" onClick={() => setMenuOpen(false)} aria-label="Close menu"><X size={21} /></button>
         </div>
-        <div className="mt-12 flex flex-col gap-2">
+        <div className="mt-10 flex flex-col gap-2">
           <div className="flex items-center gap-3 rounded-xl bg-white/15 px-4 py-3 font-medium"><CalendarDays size={19} /> Overview</div>
           <div className="flex items-center gap-3 rounded-xl px-4 py-3 text-white/70"><Users size={19} /> Email list</div>
           <div className="flex items-center gap-3 rounded-xl px-4 py-3 text-white/70"><Clock3 size={19} /> Schedule</div>
+        </div>
+        <div className="mt-8 rounded-2xl bg-white p-3 text-gray-900 shadow-lg">
+          <Calendar
+            mode="single"
+            selected={selectedDate}
+            onSelect={setSelectedDate}
+            month={calendarMonth}
+            onMonthChange={setCalendarMonth}
+            className="w-full"
+          />
         </div>
         <div className="absolute bottom-7 left-6 right-6 rounded-2xl bg-white/10 p-4 text-sm text-white/75">
           <p className="font-medium text-white">Owner account</p><p className="mt-1 truncate">{email}</p>
