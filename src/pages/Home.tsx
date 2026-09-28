@@ -22,18 +22,13 @@ export function Home() {
 
   const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
-    
     if (!email) return;
-
     setStatus('loading');
-    
     try {
       const { error } = await supabase
         .from('lnp_email_list')
         .insert([{ email: email }]);
-
       if (error) throw error;
-
       setStatus('success');
       setMessage('Thank you for subscribing! Check your email for your 10% discount code.');
       setEmail('');
@@ -47,17 +42,21 @@ export function Home() {
   return (
     <div>
       {/* Hero Section */}
-      <section 
-        className="relative min-h-[85vh] lg:min-h-[90vh] flex items-center justify-center bg-cover bg-center bg-no-repeat py-16 px-4 overflow-hidden"
-        style={{
-          backgroundImage: `url(${lavenderHeroBg})`,
-        }}
-      >
-        {/* Subtle vignette/scrim around edges only if needed - no full white wash */}
-        <div className="absolute inset-0 bg-black/5 z-10 pointer-events-none"></div>
-        
-        <div className="relative max-w-4xl mx-auto text-center z-20 w-full">
-          <div className="bg-white/85 backdrop-blur-md rounded-3xl p-8 sm:p-10 md:p-14 border border-white/90 shadow-2xl transition-all">
+      <section className="relative w-full flex items-center justify-center overflow-hidden min-h-[calc(100vh-4rem)] py-16 bg-brand-purple">
+        {/* Full-cover background image layer */}
+        <img
+          src={lavenderHeroBg}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover object-center z-0 select-none pointer-events-none"
+        />
+
+        {/* Subtle scrim so the card pops */}
+        <div className="absolute inset-0 bg-black/5 z-10 pointer-events-none" />
+
+        {/* Content card */}
+        <div className="relative z-20 max-w-4xl w-full mx-auto px-4 text-center">
+          <div className="bg-white/90 backdrop-blur-md rounded-3xl p-8 sm:p-10 md:p-14 border border-white shadow-2xl">
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif text-brand-purple font-bold tracking-tight mb-6 leading-tight">
               Naturopathic Practitioner in Butler, PA
             </h1>
@@ -65,21 +64,21 @@ export function Home() {
               Partnering with you to restore balance through natural health.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Link 
-                to="/shop" 
+              <Link
+                to="/shop"
                 className="w-full sm:w-auto bg-brand-purple hover:bg-brand-purple/90 text-white font-semibold px-8 py-3.5 rounded-full flex items-center justify-center gap-2.5 shadow-lg hover:shadow-xl transition-all duration-200 transform hover:-translate-y-0.5"
               >
                 <ShoppingBag size={20} />
                 Shop Now
               </Link>
-              <Link 
+              <Link
                 to="/consultation"
                 className="w-full sm:w-auto bg-brand-green hover:bg-brand-green/90 text-white font-semibold px-8 py-3.5 rounded-full flex items-center justify-center gap-2.5 shadow-lg hover:shadow-xl transition-all duration-200 transform hover:-translate-y-0.5"
               >
                 <Calendar size={20} />
                 Book a Consultation
               </Link>
-              <Link 
+              <Link
                 to="/location"
                 className="w-full sm:w-auto bg-white hover:bg-purple-50 text-brand-purple font-semibold border-2 border-brand-purple/30 px-8 py-3.5 rounded-full flex items-center justify-center gap-2.5 shadow-md hover:shadow-lg transition-all duration-200"
               >
