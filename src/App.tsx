@@ -10,6 +10,7 @@ import { Services } from './pages/Services';
 import { ServiceDetail } from './pages/ServiceDetail';
 import { Location } from './pages/Location';
 import { Consultation } from './pages/Consultation';
+import { AdminDashboard } from './pages/AdminDashboard';
 import { ScrollToTop } from './components/ScrollToTop';
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
         <Route path="/services/:slug" element={<Layout><ServiceDetail /></Layout>} />
         <Route path="/location" element={<Layout><Location /></Layout>} />
         <Route path="/consultation" element={<Layout><Consultation /></Layout>} />
+        <Route path="/admin" element={<AdminDashboard />} />
       </Routes>
     </>
   );
