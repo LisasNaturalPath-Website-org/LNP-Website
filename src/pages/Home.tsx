@@ -349,4 +349,4 @@ export function Home() {
       </section>
     </div>
   );
-}.
+}
