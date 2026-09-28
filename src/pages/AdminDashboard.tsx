@@ -14,20 +14,10 @@ import {
   X,
 } from 'lucide-react';
 
-const demoSubscribers = [
-  { email: 'amanda.williams@gmail.com', joined: 'Sep 24, 2026', status: 'Subscribed' },
-  { email: 'jordan.miller@yahoo.com', joined: 'Sep 22, 2026', status: 'Subscribed' },
-  { email: 'sarah.bennett@gmail.com', joined: 'Sep 18, 2026', status: 'Subscribed' },
-  { email: 'michael.turner@outlook.com', joined: 'Sep 15, 2026', status: 'Subscribed' },
-  { email: 'emily.carter@gmail.com', joined: 'Sep 11, 2026', status: 'Subscribed' },
-];
+type Subscriber = { email: string; joined: string; status: string };
+type Appointment = { time: string; name: string; service: string; detail: string; color: string };
 
-const demoAppointments = [
-  { time: '9:00 AM', name: 'Amanda Williams', service: 'Initial Consultation', detail: 'Hormone & wellness assessment', color: 'bg-brand-purple' },
-  { time: '11:30 AM', name: 'Jordan Miller', service: 'Colon Hydrotherapy', detail: 'Wellness Center', color: 'bg-brand-green' },
-  { time: '2:00 PM', name: 'Sarah Bennett', service: 'Deep Tissue Massage', detail: '60 minute session', color: 'bg-amber-500' },
-  { time: '4:30 PM', name: 'Michael Turner', service: 'Follow-up Consultation', detail: 'Natural health plan review', color: 'bg-brand-purple' },
-];
+const appointmentColors = ['bg-brand-purple', 'bg-brand-green', 'bg-amber-500'];
 
 export function AdminDashboard() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -36,8 +26,8 @@ export function AdminDashboard() {
   const [loginError, setLoginError] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [menuOpen, setMenuOpen] = useState(false);
-  const [liveSubscribers, setLiveSubscribers] = useState(demoSubscribers);
-  const [liveAppointments, setLiveAppointments] = useState(demoAppointments);
+  const [liveSubscribers, setLiveSubscribers] = useState<Subscriber[]>([]);
+  const [liveAppointments, setLiveAppointments] = useState<Appointment[]>([]);
   const [isLoadingData, setIsLoadingData] = useState(false);
   const [dataError, setDataError] = useState('');
 
@@ -53,24 +43,22 @@ export function AdminDashboard() {
       ]);
 
       if (subscriberResult.error || bookingResult.error) {
-        setDataError('Live records could not be loaded. Showing the latest preview data instead.');
+        setDataError('Live records could not be loaded. Check that the lnp_email_list and lnp_bookings tables are available to this project.');
+        setLiveSubscribers([]);
+        setLiveAppointments([]);
       } else {
-        if (subscriberResult.data?.length) {
-          setLiveSubscribers(subscriberResult.data.map((subscriber) => ({
-            email: subscriber.email,
-            joined: subscriber.created_at ? new Date(subscriber.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Recently joined',
-            status: 'Subscribed',
-          })));
-        }
-        if (bookingResult.data?.length) {
-          setLiveAppointments(bookingResult.data.map((booking, index) => ({
-            time: booking.booking_time || 'Time pending',
-            name: booking.full_name || 'New client',
-            service: booking.service_title || 'Wellness appointment',
-            detail: booking.booking_date || 'Date pending',
-            color: index % 3 === 1 ? 'bg-brand-green' : index % 3 === 2 ? 'bg-amber-500' : 'bg-brand-purple',
-          })));
-        }
+        setLiveSubscribers((subscriberResult.data ?? []).map((subscriber) => ({
+          email: subscriber.email,
+          joined: subscriber.created_at ? new Date(subscriber.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Recently joined',
+          status: 'Subscribed',
+        })));
+        setLiveAppointments((bookingResult.data ?? []).map((booking, index) => ({
+          time: booking.booking_time || 'Time pending',
+          name: booking.full_name || 'New client',
+          service: booking.service_title || 'Wellness appointment',
+          detail: booking.booking_date || 'Date pending',
+          color: appointmentColors[index % appointmentColors.length],
+        })));
       }
       setIsLoadingData(false);
     };
@@ -131,7 +119,7 @@ export function AdminDashboard() {
               Sign in to dashboard
             </button>
             <p className="mt-5 text-center text-xs leading-relaxed text-gray-500">
-              Preview mode: connect authentication and a database to secure this portal and load live records.
+              Dashboard records are loaded from your configured Supabase tables after sign-in.
             </p>
           </form>
         </div>
@@ -172,8 +160,8 @@ export function AdminDashboard() {
           {isLoadingData && <p className="mb-6 text-sm text-gray-500" role="status">Loading live records...</p>}
           <div className="grid gap-5 md:grid-cols-3">
             <div className="rounded-2xl bg-brand-purple p-6 text-white shadow-lg"><div className="flex items-center justify-between"><p className="text-sm text-white/75">Today&apos;s appointments</p><CalendarDays size={21} /></div><p className="mt-4 text-4xl font-semibold">{liveAppointments.length}</p><p className="mt-2 text-sm text-white/75">All appointments confirmed</p></div>
-            <div className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-gray-200"><div className="flex items-center justify-between"><p className="text-sm text-gray-500">Email subscribers</p><Mail className="text-brand-green" size={21} /></div><p className="mt-4 text-4xl font-semibold text-brand-purple">128</p><p className="mt-2 text-sm text-brand-green">+12 this month</p></div>
-            <div className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-gray-200"><div className="flex items-center justify-between"><p className="text-sm text-gray-500">Next appointment</p><Clock3 className="text-brand-purple" size={21} /></div><p className="mt-4 text-2xl font-semibold text-brand-purple">9:00 AM</p><p className="mt-2 text-sm text-gray-500">Amanda Williams</p></div>
+            <div className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-gray-200"><div className="flex items-center justify-between"><p className="text-sm text-gray-500">Email subscribers</p><Mail className="text-brand-green" size={21} /></div><p className="mt-4 text-4xl font-semibold text-brand-purple">{liveSubscribers.length}</p><p className="mt-2 text-sm text-gray-500">Live records from Supabase</p></div>
+            <div className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-gray-200"><div className="flex items-center justify-between"><p className="text-sm text-gray-500">Next appointment</p><Clock3 className="text-brand-purple" size={21} /></div><p className="mt-4 text-2xl font-semibold text-brand-purple">{liveAppointments[0]?.time ?? 'None scheduled'}</p><p className="mt-2 text-sm text-gray-500">{liveAppointments[0]?.name ?? 'No upcoming appointments'}</p></div>
           </div>
 
           <section className="mt-8 rounded-2xl bg-white p-6 shadow-sm ring-1 ring-gray-200 sm:p-7"><div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center"><div><h2 className="text-2xl font-semibold text-brand-purple">Today&apos;s schedule</h2><p className="mt-1 text-sm text-gray-500">Appointments for September 27, 2026</p></div><button className="inline-flex items-center justify-center gap-2 rounded-lg border border-gray-200 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"><Download size={17} /> Export schedule</button></div><div className="mt-6 grid gap-3">{liveAppointments.map((appointment) => <div key={appointment.time} className="flex items-center gap-4 rounded-xl border border-gray-100 p-4"><div className={`size-2.5 shrink-0 rounded-full ${appointment.color}`} /><div className="w-20 shrink-0 text-sm font-semibold text-gray-500">{appointment.time}</div><div className="min-w-0 flex-1"><p className="font-semibold text-gray-900">{appointment.name}</p><p className="truncate text-sm text-gray-500">{appointment.service} · {appointment.detail}</p></div><CheckCircle2 className="hidden text-brand-green sm:block" size={19} /></div>)}</div></section>
