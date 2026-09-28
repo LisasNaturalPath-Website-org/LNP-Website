@@ -42,15 +42,15 @@ export function Home() {
   return (
     <div>
       {/* Hero Section */}
-      <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden py-16 bg-brand-purple">
-        {/* Full-cover background image layer */}
-        <img
-          src={lavenderHeroBg}
-          alt=""
-          aria-hidden="true"
-          className="absolute inset-0 w-full h-full object-cover object-center z-0 select-none pointer-events-none"
-        />
-
+      <section
+        className="relative w-full min-h-screen flex items-center justify-center overflow-hidden py-16"
+        style={{
+          backgroundImage: `url(${lavenderHeroBg})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+        }}
+      >
         {/* Subtle scrim so the card pops */}
         <div className="absolute inset-0 bg-black/5 z-10 pointer-events-none" />
 
